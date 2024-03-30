@@ -1,0 +1,14 @@
+.ingredientsblock__ingredients {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  row-gap: 32px;
+  column-gap: 24px;
+  margin: 24px 16px 40px;
+}
+
+.ingredientsblock__name {
+  width: 100%;
+  grid-column: span 2;
+  margin: 0;
+  text-align: start;
+}

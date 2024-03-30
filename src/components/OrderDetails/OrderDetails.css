@@ -1,0 +1,11 @@
+.order {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.order__logo {
+  height: 120px;
+  width: 120px;
+}

@@ -1,0 +1,16 @@
+.burgeringredients {
+  width: 600px;
+}
+
+.burgeringredients__title {
+  text-align: start;
+}
+
+.burgeringredients__ingredients {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+
+  height: 716px;
+  margin-top: 40px;
+}

@@ -1,0 +1,39 @@
+.burgerconstructor {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.burgerconstructor__main {
+  height: 464px;
+  scrollbar-width: thin;
+  box-sizing: border-box;
+  overflow-y: auto;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.burgerconstructor__main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.burgerconstructor__card {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.burgerconstructor__total {
+  display: flex;
+  align-items: center;
+}
+
+.burgerconstructor__currency svg {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
