@@ -1,9 +1,10 @@
 import React from "react";
 import { Ingredient } from "./../Ingredient/Ingredient";
-import "./BurgerIngredientsBlock.css";
+import styles from "./BurgerIngredientsBlock.module.css";
 import { Modal } from "./../Modal/Modal";
 import { IngredientDetails } from "./../IngredientDetails/IngredientDetails";
 import PropTypes from "prop-types";
+import { ingredientType } from "./../../utils/types";
 
 export function BurgerIngredientsBlock(props) {
   const [isIngredientModalOpen, setIsIngredientModalOpen] =
@@ -21,14 +22,11 @@ export function BurgerIngredientsBlock(props) {
   }
 
   return (
-    <div className="ingredientsblock">
-      <p
-        className="ingredientsblock__name text text_type_main-medium"
-        id={props.id}
-      >
+    <div>
+      <p className={`${styles.name} text text_type_main-medium`} id={props.id}>
         {props.name}
       </p>
-      <div className="ingredientsblock__ingredients">
+      <div className={styles.ingredients}>
         {props.data
           .filter((el) => el.type === props.id)
           .map((el) => (
@@ -39,13 +37,14 @@ export function BurgerIngredientsBlock(props) {
             />
           ))}
       </div>
-      <Modal
-        isOpen={isIngredientModalOpen}
-        title="Детали ингредиента"
-        onClose={() => setIsIngredientModalOpen(false)}
-      >
-        <IngredientDetails ingredient={ingredientForModal} />
-      </Modal>
+      {isIngredientModalOpen && (
+        <Modal
+          title="Детали ингредиента"
+          onClose={() => setIsIngredientModalOpen(false)}
+        >
+          <IngredientDetails ingredient={ingredientForModal} />
+        </Modal>
+      )}
     </div>
   );
 }
@@ -53,13 +52,5 @@ export function BurgerIngredientsBlock(props) {
 BurgerIngredientsBlock.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
+  data: PropTypes.arrayOf(ingredientType).isRequired,
 };

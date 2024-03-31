@@ -1,19 +1,17 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import "./BurgerIngredients.css";
+import styles from "./BurgerIngredients.module.css";
 import React, { useEffect } from "react";
 import { BurgerIngredientsBlock } from "./../BurgerIngredientsBlock/BurgerIngredientsBlock";
+import { ingredientType } from "./../../utils/types";
 
 import PropTypes from "prop-types";
 
 export function BurgerIngredients(props) {
-  console.log(props.data);
-
   const [current, setCurrent] = React.useState("one");
   const [bunArray, setBunArray] = React.useState([]);
 
   useEffect(() => {
     setBunArray();
-    console.log(bunArray);
   }, []);
 
   const setCurrentTab = (tab) => {
@@ -24,11 +22,11 @@ export function BurgerIngredients(props) {
   };
 
   return (
-    <div className="burgeringredients">
-      <h2 className="text text_type_main-large mt-10 mb-5 burgeringredients__title">
+    <div className={styles.burgeringredients}>
+      <h2 className={`text text_type_main-large mt-10 mb-5 ${styles.title}`}>
         Соберите бургер
       </h2>
-      <div style={{ display: "flex" }}>
+      <div className={styles.tab}>
         <Tab
           value="one"
           active={current === "bun"}
@@ -51,7 +49,7 @@ export function BurgerIngredients(props) {
           Начинки
         </Tab>
       </div>
-      <div className="burgeringredients__ingredients">
+      <div className={styles.ingredients}>
         <BurgerIngredientsBlock name="Булки" data={props.data} id="bun" />
         <BurgerIngredientsBlock name="Соусы" data={props.data} id="sauce" />
         <BurgerIngredientsBlock name="Начинки" data={props.data} id="main" />
@@ -61,13 +59,5 @@ export function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
+  data: PropTypes.arrayOf(ingredientType).isRequired,
 };

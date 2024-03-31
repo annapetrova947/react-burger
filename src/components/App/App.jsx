@@ -1,30 +1,32 @@
 import React from "react";
-import "./App.css";
+import styles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
-import { data } from "../../utils/data";
 
 function App() {
-  const DATA_URL = "";
-
   const [data, setData] = React.useState(undefined);
 
   React.useEffect(() => {
     const getData = () => {
       fetch("https://norma.nomoreparties.space/api/ingredients")
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          return Promise.reject(`Ошибка ${res.status}`);
+        })
         .then((jsonData) => setData(jsonData.data))
-        .catch((e) => console.log(e));
+        .catch(console.error);
     };
 
     getData();
   }, []);
 
   return (
-    <div className="App">
+    <div className={styles.app}>
       <AppHeader />
-      <main className="main">
+      <main className={styles.main}>
         {data !== undefined ? (
           <>
             <BurgerIngredients data={data} />

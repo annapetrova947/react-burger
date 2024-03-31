@@ -13,5 +13,5 @@ export function IngredientNutrition(props) {
 
 IngredientNutrition.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
 };

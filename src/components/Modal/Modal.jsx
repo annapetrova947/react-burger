@@ -2,15 +2,15 @@ import React from "react";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import { createPortal } from "react-dom";
-import "./Modal.css";
+import styles from "./Modal.module.css";
 import PropTypes from "prop-types";
 
 const modalRoot = document.getElementById("modal");
 
-export function Modal({ title, onClose, children, isOpen }) {
+export function Modal({ title, onClose, children }) {
   React.useEffect(() => {
     const close = (e) => {
-      if (e.keyCode === 27) {
+      if (e.key === "Escape") {
         onClose();
       }
     };
@@ -19,26 +19,22 @@ export function Modal({ title, onClose, children, isOpen }) {
   }, []);
 
   return createPortal(
-    <>
-      {isOpen && (
-        <div>
-          <div className="modal">
-            <div className="modal__header ml-10 pt-10">
-              {title && (
-                <p className="text text_type_main-large mr-10 ml-10 modal__title">
-                  {title}
-                </p>
-              )}
-              <button className="modal__close-button" onClick={() => onClose()}>
-                <CloseIcon />
-              </button>
-            </div>
-            {children}
-          </div>
-          <ModalOverlay onClick={() => onClose()} />
+    <div>
+      <div className={styles.modal}>
+        <div className={`${styles.header} ml-10 pt-10`}>
+          {title && (
+            <p className={`text text_type_main-large ${styles.title}`}>
+              {title}
+            </p>
+          )}
+          <button className={styles.close_button} onClick={onClose}>
+            <CloseIcon />
+          </button>
         </div>
-      )}
-    </>,
+        {children}
+      </div>
+      <ModalOverlay onClick={onClose} />
+    </div>,
 
     modalRoot,
   );

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./BurgerConstructor.css";
+import styles from "./BurgerConstructor.module.css";
 import PropTypes from "prop-types";
+import { ingredientType } from "./../../utils/types";
 import { Modal } from "./../Modal/Modal";
 import { OrderDetails } from "./../OrderDetails/OrderDetails";
 
@@ -24,7 +25,6 @@ export function BurgerConstructor(props) {
         element.type === "sauce" &&
         arr.every((el) => el.type !== "sauce")
       ) {
-        console.log(arr.every((el) => el.type !== "sauce"));
         arr.push(element);
       } else if (element.type === "main") {
         arr.push(element);
@@ -38,13 +38,9 @@ export function BurgerConstructor(props) {
   if (ing.length !== 0) {
     return (
       <>
-        <div
-          className="burgerconstructor mt-25"
-          style={{ display: "flex", flexDirection: "column", gap: "16px" }}
-        >
+        <div className={`${styles.burgerconstructor} mt-25`}>
           <div className="pl-8 pr-4">
             <ConstructorElement
-              className="aaa"
               type="top"
               isLocked={true}
               text={ing[0].name + " (верх)"}
@@ -53,13 +49,13 @@ export function BurgerConstructor(props) {
             />
           </div>
 
-          <div className="burgerconstructor__main">
+          <div className={styles.burgerconstructor__main}>
             {ing.map((el, i) =>
               i !== 0 && i !== ing.length - 1 ? (
-                <div className="burgerconstructor__card" key={el._id}>
+                <div className={styles.burgerconstructor__card} key={el._id}>
                   <DragIcon
                     type="primary"
-                    className="burgerconstructor__dragicon"
+                    className={styles.burgerconstructor__dragicon}
                   />
                   <ConstructorElement
                     text={el.name}
@@ -83,11 +79,11 @@ export function BurgerConstructor(props) {
             />
           </div>
 
-          <div className="burgerconstructor__total mt-6">
+          <div className={`${styles.burgerconstructor__total} mt-6`}>
             <p className="text text_type_digits-medium mr-2">
               {ing.reduce((sum, ingredient) => sum + ingredient.price, 0)}
             </p>
-            <span className="burgerconstructor__currency pr-10">
+            <span className={`${styles.burgerconstructor__currency} pr-10`}>
               <CurrencyIcon type="primary" />
             </span>
 
@@ -99,12 +95,12 @@ export function BurgerConstructor(props) {
             >
               Оформить заказ
             </Button>
-            <Modal
-              isOpen={isOrderModalOpen}
-              onClose={() => setIsOrderModalOpen(false)}
-            >
-              <OrderDetails />
-            </Modal>
+
+            {isOrderModalOpen && (
+              <Modal onClose={() => setIsOrderModalOpen(false)}>
+                <OrderDetails />
+              </Modal>
+            )}
           </div>
         </div>
       </>
@@ -113,13 +109,5 @@ export function BurgerConstructor(props) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
+  data: PropTypes.arrayOf(ingredientType).isRequired,
 };

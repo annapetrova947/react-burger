@@ -12,19 +12,19 @@
   border-radius: 40px;
 }
 
-.modal__header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
 
-.modal__title {
+.title {
   height: 64px;
   text-align: center;
 }
 
-.modal__close-button {
+.close_button {
   background: none;
   border: 0;
   position: absolute;

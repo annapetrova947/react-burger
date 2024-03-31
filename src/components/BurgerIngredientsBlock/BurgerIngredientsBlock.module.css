@@ -1,4 +1,4 @@
-.ingredientsblock__ingredients {
+.ingredients {
   display: grid;
   grid-template-columns: repeat(2, auto);
   row-gap: 32px;
@@ -6,7 +6,7 @@
   margin: 24px 16px 40px;
 }
 
-.ingredientsblock__name {
+.name {
   width: 100%;
   grid-column: span 2;
   margin: 0;
