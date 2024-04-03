@@ -1,0 +1,15 @@
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.nutrition {
+  display: grid;
+  grid-template-columns: 120px repeat(3, 112px);
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
