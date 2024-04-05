@@ -5,12 +5,26 @@ import {
 import styles from "./Ingredient.module.css";
 import PropTypes from "prop-types";
 import { ingredientType } from "./../../utils/types";
+import { useDrag } from "react-dnd";
+import { useSelector } from 'react-redux'
 
 export function Ingredient(props) {
+  const ingredient = props.ingredient
+  const [, dragRef] = useDrag({
+    type: 'ing',
+    item: {ingredient}
+});
+
+const choosenIngredients = useSelector(store => store.choosenIngredients.ingredients);
+const ingredientInChoosen = choosenIngredients.filter(ing => ing._id === props.ingredient._id)
+
+const ingredientAmount = ingredientInChoosen.length !== 0 ? ingredientInChoosen.length : undefined
+
   return (
-    <div className={styles.ingredient} onClick={props.onClickFunction}>
+    <div ref={dragRef} className={styles.ingredient} onClick={props.onClickFunction}>
       <img src={props.ingredient.image} alt="Ингредиент" />
-      <Counter count={1} size="default" extraClass="m-1" />
+      {ingredientAmount ?  <Counter count={ingredientAmount} size="default" extraClass="m-1" /> : ''}
+     
       <div className={styles.priceblock}>
         <p className={`${styles.price} text text_type_digits-default mr-1`}>
           {props.ingredient.price}

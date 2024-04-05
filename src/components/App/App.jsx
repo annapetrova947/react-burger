@@ -3,34 +3,25 @@ import styles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
+import { useSelector, useDispatch } from "react-redux";
+import { getItems } from "../../services/actions/ingredients";
 
 function App() {
-  const [data, setData] = React.useState(undefined);
+  const {items, itemsRequest, itemsFailed} = useSelector(store => store.ingredients);
+  const dispatch = useDispatch()
 
   React.useEffect(() => {
-    const getData = () => {
-      fetch("https://norma.nomoreparties.space/api/ingredients")
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Ошибка ${res.status}`);
-        })
-        .then((jsonData) => setData(jsonData.data))
-        .catch(console.error);
-    };
-
-    getData();
+    dispatch(getItems())
   }, []);
 
   return (
     <div className={styles.app}>
       <AppHeader />
       <main className={styles.main}>
-        {data !== undefined ? (
+        {items.length !== 0 ? (
           <>
-            <BurgerIngredients data={data} />
-            <BurgerConstructor data={data} />
+            <BurgerIngredients data={items} />
+            <BurgerConstructor data={items} />
           </>
         ) : (
           ""

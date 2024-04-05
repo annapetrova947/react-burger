@@ -5,6 +5,14 @@
   gap: 16px;
 }
 
+.empty{
+  height: 600px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .burgerconstructor__main {
   height: 464px;
   scrollbar-width: thin;

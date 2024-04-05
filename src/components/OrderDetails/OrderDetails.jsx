@@ -1,9 +1,16 @@
 import styles from "./OrderDetails.module.css";
 import logoDone from "./../../images/done.jpg";
+import { useSelector } from "react-redux";
 export function OrderDetails() {
+
+  const {response, 
+  isRequest,
+  isFailed} = useSelector(store => store.order);
   return (
+    <>
+    { isRequest ? <p>Загрузка</p> :
     <div className={styles.order}>
-      <h2 className="text text_type_digits-large mt-20 mb-8">034568</h2>
+      <h2 className="text text_type_digits-large mt-20 mb-8">{response.order.number}</h2>
       <p className="text text_type_main-medium">идентификатор заказа</p>
       <img
         src={logoDone}
@@ -15,5 +22,7 @@ export function OrderDetails() {
         Дождитесь готовности на орбитальной станции
       </p>
     </div>
+}
+    </>
   );
 }

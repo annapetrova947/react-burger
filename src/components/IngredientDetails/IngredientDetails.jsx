@@ -4,6 +4,8 @@ import { ingredientType } from "./../../utils/types";
 
 export function IngredientDetails({ ingredient }) {
   return (
+    <>
+    {ingredient &&
     <div className={`${styles.details} mb-15`}>
       <img src={ingredient.image_large} alt="Ингредиент" />
       <p className="text text_type_main-medium mb-8">{ingredient.name}</p>
@@ -17,6 +19,8 @@ export function IngredientDetails({ ingredient }) {
         />
       </div>
     </div>
+    }
+    </>
   );
 }
 
