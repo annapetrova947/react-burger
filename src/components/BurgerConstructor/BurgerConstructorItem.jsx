@@ -1,22 +1,22 @@
-import { 
-    ConstructorElement, 
-    DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  ConstructorElement,
+  DragIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 
-import { sortIngredients } from "../../services/actions/choosenIngredient"
-import { deleteIngredient } from "./../../services/actions/choosenIngredient"
+import { sortIngredients } from "../../services/actions/choosenIngredient";
+import { deleteIngredient } from "./../../services/actions/choosenIngredient";
 
 import PropTypes from "prop-types";
 import { ingredientType } from "./../../utils/types";
 import styles from "./BurgerConstructorItem.module.css";
 
 export function BurgerConstructorItem({ item, index, handleDeleteIngredient }) {
-    const dispatch = useDispatch();
-    const ref = useRef(null);
-  
+  const dispatch = useDispatch();
+  const ref = useRef(null);
 
   const [{ isDragging }, drag] = useDrag({
     type: "sortItem",
@@ -59,7 +59,6 @@ export function BurgerConstructorItem({ item, index, handleDeleteIngredient }) {
         return;
       }
 
-
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return;
       }
@@ -75,7 +74,6 @@ export function BurgerConstructorItem({ item, index, handleDeleteIngredient }) {
 
   return (
     <div
-      key={item.id}
       className={styles.item}
       ref={ref}
       data-handler-id={handlerId}

@@ -2,34 +2,34 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerIngredients.module.css";
 import React, { useEffect } from "react";
 import { BurgerIngredientsBlock } from "./../BurgerIngredientsBlock/BurgerIngredientsBlock";
-import { ingredientType } from "./../../utils/types";
-import { useInView } from 'react-intersection-observer';
+import { useSelector } from "react-redux";
+import { useInView } from "react-intersection-observer";
 
-import PropTypes from "prop-types";
-
-export function BurgerIngredients(props) {
+export function BurgerIngredients() {
   const [current, setCurrent] = React.useState("bun");
-  const [bunArray, setBunArray] = React.useState([]);
   const [bunsRef, bunsInView] = useInView();
   const [saucesRef, saucesInView] = useInView();
   const [stuffingRef, mainInView] = useInView();
 
+  const { items, itemsRequest, itemsFailed } = useSelector(
+    (store) => store.ingredients,
+  );
+
   useEffect(() => {
     if (bunsInView) {
-      setCurrent('bun');
+      setCurrent("bun");
     } else if (saucesInView) {
-      setCurrent('sauce');
+      setCurrent("sauce");
     } else if (mainInView) {
-      setCurrent('main');
+      setCurrent("main");
     }
   }, [bunsInView, saucesInView, mainInView]);
 
   const setCurrentTab = (tab) => {
-    
     const element = document.getElementById(tab);
 
     element?.scrollIntoView({ block: "start", behavior: "smooth" });
-    
+
     setCurrent(tab);
   };
 
@@ -62,24 +62,22 @@ export function BurgerIngredients(props) {
         </Tab>
       </div>
       <div className={styles.ingredients}>
-        
-
-
-        <div ref={bunsRef}>
-            <BurgerIngredientsBlock name="Булки" data={props.data} id="bun"/>
-          </div>
-          <div ref={stuffingRef}>
-            <BurgerIngredientsBlock name="Соусы" data={props.data} id="sauce"/>
-          </div>
-          <div ref={saucesRef}>
-            <BurgerIngredientsBlock name="Начинки" data={props.data} id="main"/>
-          </div>
+        {items.length !== 0 ? (
+          <>
+            <div ref={bunsRef}>
+              <BurgerIngredientsBlock name="Булки" data={items} id="bun" />
+            </div>
+            <div ref={stuffingRef}>
+              <BurgerIngredientsBlock name="Соусы" data={items} id="sauce" />
+            </div>
+            <div ref={saucesRef}>
+              <BurgerIngredientsBlock name="Начинки" data={items} id="main" />
+            </div>
+          </>
+        ) : (
+          ""
+        )}
       </div>
-
-      </div>
+    </div>
   );
 }
-
-BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientType).isRequired,
-};

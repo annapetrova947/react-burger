@@ -6,11 +6,14 @@ import { IngredientDetails } from "./../IngredientDetails/IngredientDetails";
 import PropTypes from "prop-types";
 import { ingredientType } from "./../../utils/types";
 import { useDispatch, useSelector } from "react-redux";
-import {deleteIngredientFromModal, addIngredientToModal} from './../../services/actions/modal';
+import {
+  deleteIngredientFromModal,
+  addIngredientToModal,
+} from "./../../services/actions/modal";
 
 export function BurgerIngredientsBlock(props) {
-  const dispatch = useDispatch()
-  const {currentIngredient} = useSelector(store => store.modal);
+  const dispatch = useDispatch();
+  const { currentIngredient } = useSelector((store) => store.modal);
   const [isIngredientModalOpen, setIsIngredientModalOpen] =
     React.useState(false);
 
@@ -35,10 +38,9 @@ export function BurgerIngredientsBlock(props) {
               ingredient={el}
               key={el._id}
               onClickFunction={() => {
-                dispatch(addIngredientToModal(el))
-                handleOpenModal(el)
-              }
-              }
+                dispatch(addIngredientToModal(el));
+                handleOpenModal(el);
+              }}
             />
           ))}
       </div>
@@ -46,8 +48,9 @@ export function BurgerIngredientsBlock(props) {
         <Modal
           title="Детали ингредиента"
           onClose={() => {
-            handleCloseModal()
-            dispatch(deleteIngredientFromModal())}}
+            handleCloseModal();
+            dispatch(deleteIngredientFromModal());
+          }}
         >
           <IngredientDetails ingredient={currentIngredient} />
         </Modal>
