@@ -15,12 +15,14 @@ import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useNavigate } from "react-router-dom";
 
 export function BurgerConstructor() {
   const { ingredients } = useSelector((store) => store.choosenIngredients);
   console.log(ingredients);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function onDropHandler(item) {
     dispatch(addIngredient(item.ingredient));
@@ -35,6 +37,8 @@ export function BurgerConstructor() {
 
   const bunItems = ingredients.filter((ing) => ing.type === "bun");
   const bun = bunItems.length !== 0 ? bunItems[0] : undefined;
+
+  const { isLoggedIn } = useSelector((store) => store.auth);
 
   const calcBurgerPrice = useMemo(() => {
     return () => {
@@ -109,8 +113,12 @@ export function BurgerConstructor() {
             type="primary"
             size="medium"
             onClick={() => {
-              dispatch(makeOrder(ingredients));
-              setIsOrderModalOpen(true);
+              if (isLoggedIn) {
+                dispatch(makeOrder(ingredients));
+                setIsOrderModalOpen(true);
+              } else {
+                navigate("/login");
+              }
             }}
           >
             Оформить заказ

@@ -20,4 +20,5 @@
 
 .constructor {
   display: flex;
+  cursor: pointer;
 }

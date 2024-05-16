@@ -34,14 +34,7 @@ export function BurgerIngredientsBlock(props) {
         {props.data
           .filter((el) => el.type === props.id)
           .map((el) => (
-            <Ingredient
-              ingredient={el}
-              key={el._id}
-              onClickFunction={() => {
-                dispatch(addIngredientToModal(el));
-                handleOpenModal(el);
-              }}
-            />
+            <Ingredient ingredient={el} key={el._id} />
           ))}
       </div>
       {isIngredientModalOpen && (
