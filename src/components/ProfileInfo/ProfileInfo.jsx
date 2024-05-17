@@ -24,7 +24,6 @@ export function ProfileInfo() {
   }, []);
 
   useEffect(() => {
-    console.log(email, name);
     setFormValues({
       name: name,
       email: email,
@@ -39,7 +38,6 @@ export function ProfileInfo() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
     dispatch(updateUser(form));
     //dispatch(checkUserAuth());
     setIsFormChanged(false);

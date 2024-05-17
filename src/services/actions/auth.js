@@ -12,7 +12,6 @@ export const USER_LOGOUT = "USER_LOGOUT";
 export const CHECK_TOKEN = "CHECK_TOKEN";
 
 export const registerUser = (userData) => {
-  console.log("action", userData);
   return function (dispatch) {
     dispatch({
       type: REGISTER_REQUEST,
@@ -35,7 +34,6 @@ export const registerUser = (userData) => {
 };
 
 export const loginUser = (userData) => {
-  console.log("action", userData);
   return function (dispatch) {
     dispatch({
       type: LOGIN_REQUEST,

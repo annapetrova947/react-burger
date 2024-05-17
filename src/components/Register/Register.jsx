@@ -46,7 +46,6 @@ export function Register() {
   );
 
   useEffect(() => {
-    console.log(registerResponse);
     if (registerResponse["success"] == true) {
       navigate("/");
     }

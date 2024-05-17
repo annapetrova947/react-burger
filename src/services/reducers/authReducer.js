@@ -58,7 +58,6 @@ export const authReducer = (state = initialState, action) => {
       return { ...state, loginFailed: true, loginRequest: false };
     }
     case USER_LOGOUT: {
-      console.log("action.response", action.response);
       return {
         ...state,
         email: "",
@@ -67,7 +66,6 @@ export const authReducer = (state = initialState, action) => {
       };
     }
     case CHECK_TOKEN: {
-      console.log("checked");
       return {
         ...state,
         isLoggedIn: true,

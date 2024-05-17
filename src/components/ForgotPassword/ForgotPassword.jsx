@@ -29,7 +29,6 @@ export function ForgotPassword() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("forgotPasswordResponse", forgotPasswordResponse);
     if (forgotPasswordResponse["success"] == true) {
       navigate("/reset-password");
     }

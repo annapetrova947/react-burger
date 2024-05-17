@@ -37,7 +37,6 @@ export const choosenIngredientReducer = (state = initialState, action) => {
       const { from, to } = action.payload;
       const sortedIngredients = [...state.ingredients];
       sortedIngredients.splice(to, 0, sortedIngredients.splice(from, 1)[0]);
-      console.log(sortedIngredients);
       return {
         ingredients: [...sortedIngredients],
       };

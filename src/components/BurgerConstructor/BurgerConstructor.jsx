@@ -19,7 +19,6 @@ import { useNavigate } from "react-router-dom";
 
 export function BurgerConstructor() {
   const { ingredients } = useSelector((store) => store.choosenIngredients);
-  console.log(ingredients);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();

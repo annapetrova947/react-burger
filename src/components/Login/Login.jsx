@@ -39,7 +39,6 @@ export function Login() {
   );
 
   useEffect(() => {
-    console.log(loginResponse);
     if (loginResponse["success"] == true) {
       navigate("/");
     }

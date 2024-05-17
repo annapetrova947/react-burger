@@ -12,7 +12,6 @@ const initialState = {
 export const passwordReducer = (state = initialState, action) => {
   switch (action.type) {
     case FORGOT_PASSWORD_RESPONSE: {
-      console.log("action.response", action.response);
       return {
         ...state,
         forgotPasswordResponse: { ...action.response },
@@ -20,7 +19,6 @@ export const passwordReducer = (state = initialState, action) => {
       };
     }
     case RESRET_PASSWORD_RESPONSE: {
-      console.log("action.response", action.response);
       return {
         ...state,
         resetPasswordResponse: { ...action.response },

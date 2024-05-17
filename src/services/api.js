@@ -115,7 +115,6 @@ export const login = (userData) => {
     fetch(`${BASE_URL}auth/login`, options)
       .then(checkResponse)
       .then((jsonData) => {
-        console.log(jsonData);
         if ("accessToken" in jsonData) {
           localStorage.setItem("accessToken", jsonData.accessToken);
         }
@@ -128,12 +127,10 @@ export const login = (userData) => {
 };
 
 export const forgotPassword = (email) => {
-  console.log("forgotPassword", email);
   return new Promise((resolve, reject) => {
     const data = {
       email: email,
     };
-    console.log("fetch", data);
 
     const options = {
       method: "POST",
@@ -146,20 +143,17 @@ export const forgotPassword = (email) => {
     fetch(`${BASE_URL}password-reset`, options)
       .then(checkResponse)
       .then((jsonData) => {
-        console.log(jsonData);
         resolve(jsonData);
       });
   });
 };
 
 export const resetPassword = (password, token) => {
-  console.log("forgotPassword", password, token);
   return new Promise((resolve, reject) => {
     const data = {
       password: password,
       token: token,
     };
-    console.log("fetch", data);
 
     const options = {
       method: "POST",
@@ -172,14 +166,12 @@ export const resetPassword = (password, token) => {
     fetch(`${BASE_URL}password-reset/reset`, options)
       .then(checkResponse)
       .then((jsonData) => {
-        console.log(jsonData);
         resolve(jsonData);
       });
   });
 };
 
 export const getUserData = async () => {
-  console.log("getUserData", localStorage.getItem("accessToken"));
   const options = {
     method: "GET",
     headers: {
@@ -192,7 +184,6 @@ export const getUserData = async () => {
   return await fetchWithRefresh(url, options);
 };
 export const updateUserData = async (userData) => {
-  console.log("userData", userData);
   const options = {
     method: "PATCH",
     headers: {
@@ -221,7 +212,6 @@ export const logoutUser = () => {
     fetch(`${BASE_URL}auth/logout`, options)
       .then(checkResponse)
       .then((jsonData) => {
-        console.log(jsonData);
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("accessToken");
         resolve(jsonData);

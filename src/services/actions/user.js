@@ -7,7 +7,6 @@ export const getUser = () => {
   return async function (dispatch) {
     try {
       const res = await getUserData();
-      console.log(res);
       dispatch({
         type: GET_USER_DATA,
         response: res,

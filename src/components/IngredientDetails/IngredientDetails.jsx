@@ -6,9 +6,7 @@ import { useSelector } from "react-redux";
 export function IngredientDetails() {
   const { id } = useParams();
   const ingredients = useSelector((store) => store.ingredients);
-  console.log("ingredients", ingredients, id);
   const ingredient = ingredients.items.find((item) => item._id === id);
-  console.log("ingredient", ingredient);
   return (
     <>
       {ingredient && (

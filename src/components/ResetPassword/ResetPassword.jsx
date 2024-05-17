@@ -33,8 +33,7 @@ export function ResetPassword() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("resetPasswordResponse", resetPasswordResponse);
-    if (resetPasswordResponse["success"] == true) {
+    if (resetPasswordResponse["success"] === true) {
       navigate("/");
     }
   }, [resetPasswordResponse]);
