@@ -1,8 +1,12 @@
 import styles from "./IngredientDetails.module.css";
 import { IngredientNutrition } from "./IngredientNutrition";
-import { ingredientType } from "./../../utils/types";
+import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 
-export function IngredientDetails({ ingredient }) {
+export function IngredientDetails() {
+  const { id } = useParams();
+  const ingredients = useSelector((store) => store.ingredients);
+  const ingredient = ingredients.items.find((item) => item._id === id);
   return (
     <>
       {ingredient && (
@@ -26,7 +30,3 @@ export function IngredientDetails({ ingredient }) {
     </>
   );
 }
-
-IngredientDetails.propTypes = {
-  ingredient: ingredientType,
-};

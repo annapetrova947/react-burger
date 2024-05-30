@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { legacy_createStore as createStore } from "redux";
 import { applyMiddleware, compose } from "redux";
 import { thunk } from "redux-thunk";
+import { BrowserRouter } from "react-router-dom";
 
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -31,7 +32,9 @@ if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <DndProvider backend={HTML5Backend}>
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     </DndProvider>,
   );

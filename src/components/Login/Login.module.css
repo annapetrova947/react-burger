@@ -1,0 +1,10 @@
+.login {
+  margin: 180px auto;
+  width: 480px;
+}
+
+.link {
+  color: #4c4cff;
+  cursor: pointer;
+  text-decoration: none;
+}
