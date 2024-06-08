@@ -31,7 +31,8 @@ export function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function handleRegister() {
+  function handleRegister(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     dispatch(
       registerUser({
         email: email,
@@ -54,7 +55,7 @@ export function Register() {
   return (
     <div className={styles.register}>
       <p className="text text_type_main-medium mb-6">Регистрация</p>
-      <form>
+      <form onSubmit={handleRegister}>
         <Input
           type={"text"}
           placeholder={"Имя"}
@@ -81,10 +82,9 @@ export function Register() {
         />
 
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
-          onClick={handleRegister}
         >
           {registerRequest ? "Загрузка..." : "Зарегистрироваться"}
         </Button>

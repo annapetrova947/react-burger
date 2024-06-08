@@ -30,9 +30,7 @@ export function makeOrder(choosenIngredients: Array<TChoosenIng>) {
 
     orderRequest(choosenIngredients)
       .then((res) => {
-        console.log('res', res.order.number)
         if (res && res.order.number) {
-          console.log('dis')
           dispatch({
             type: GET_ORDER_SUCCESS,
             order: res.order

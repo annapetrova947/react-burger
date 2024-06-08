@@ -47,7 +47,8 @@ export const choosenIngredientReducer = (state = initialState, action: TChoosenI
     case SORT_INGREDIENTS: {
       const { from, to } = action.payload;
       const sortedIngredients = [...state.ingredients];
-      sortedIngredients.splice(to, 0, sortedIngredients.splice(from, 1)[0]);
+    
+      sortedIngredients.splice(to+1, 0, sortedIngredients.splice(from+1, 1)[0]);
       return {
         ingredients: [...sortedIngredients],
       };

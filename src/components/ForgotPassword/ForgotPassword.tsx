@@ -19,7 +19,8 @@ export function ForgotPassword() {
 
   const dispatch = useDispatch();
 
-  function handleForgotPassword() {
+  function handleForgotPassword(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     dispatch(userForgotPassword(email));
   }
 
@@ -37,7 +38,7 @@ export function ForgotPassword() {
   return (
     <div className={styles.forgot_password}>
       <p className="text text_type_main-medium mb-6">Восстановление пароля</p>
-      <form>
+      <form onSubmit={handleForgotPassword}>
         <EmailInput
           onChange={handleChangeEmail}
           value={email}
@@ -48,10 +49,9 @@ export function ForgotPassword() {
         />
 
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
-          onClick={handleForgotPassword}
         >
           Восстановить
         </Button>

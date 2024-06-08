@@ -25,7 +25,8 @@ export const ResetPassword: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  function handleResetPassword() {
+  function handleResetPassword(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     dispatch(userResetPassword(password, token));
   }
 
@@ -41,7 +42,7 @@ export const ResetPassword: React.FC = () => {
   return (
     <div className={styles.reset_password}>
       <p className="text text_type_main-medium mb-6">Восстановление пароля</p>
-      <form>
+      <form onSubmit={handleResetPassword}>
         <PasswordInput
           onChange={handleChangePassword}
           value={password}
@@ -65,10 +66,9 @@ export const ResetPassword: React.FC = () => {
           onPointerLeaveCapture={undefined}        />
 
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
-          onClick={handleResetPassword}
         >
           Сохранить
         </Button>

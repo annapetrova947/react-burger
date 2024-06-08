@@ -4,7 +4,6 @@ import { useSelector } from "./../../services/store";
 
 export function OrderDetails() {
   const { response, isRequest, isFailed } = useSelector((store) => store.order);
-  console.log(response.order.number)
   return (
     <>
       {isRequest ? (

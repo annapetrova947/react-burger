@@ -3,12 +3,15 @@ import styles from "./Profile.module.css";
 import { ProfileInfo } from "../ProfileInfo/ProfileInfo";
 import { useDispatch } from "./../../services/store";
 import { logout } from "../../services/actions/auth";
+import { useLastRoute } from './../LastRouteContext';
 
 export function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { setLastRoute } = useLastRoute();
 
   const handleLogout = () => {
+    setLastRoute('/');
     navigate("/login");
     dispatch(logout());
   };

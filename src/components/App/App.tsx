@@ -20,6 +20,7 @@ import {
   ProtectedResetRoute,
 } from "../ProtectedRoute";
 import { Modal } from "../Modal/Modal";
+import { LastRouteProvider } from './../LastRouteContext';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ function App() {
   };
 
   return (
+    <LastRouteProvider>
     <div className={styles.app}>
       <AppHeader />
       <main>
@@ -113,6 +115,7 @@ function App() {
         )}
       </main>
     </div>
+    </LastRouteProvider>
   );
 }
 

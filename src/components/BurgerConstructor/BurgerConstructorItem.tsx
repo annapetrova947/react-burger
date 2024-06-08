@@ -68,6 +68,7 @@ export function BurgerConstructorItem({ item, index }: TBurgerConstructorItem) {
       }
 
       dispatch(sortIngredients({ to: dragIndex, from: hoverIndex }));
+      console.log(dragIndex, hoverIndex)
 
       item.index = hoverIndex;
     },

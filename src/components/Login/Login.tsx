@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "./../../services/store";
 import { loginUser } from "../../services/actions/auth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useLastRoute } from './../LastRouteContext';
 
 export function Login() {
   const [email, setEmail] = React.useState("");
@@ -25,7 +26,11 @@ export function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function handleLogin() {
+  const { lastRoute } = useLastRoute();
+  const { isLoggedIn } = useSelector((store) => store.auth);
+
+  function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     dispatch(
       loginUser({
         email: email,
@@ -33,21 +38,27 @@ export function Login() {
       }),
     );
   }
+  
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(lastRoute || '/', { replace: true });
+    }
+  }, [isLoggedIn, lastRoute, navigate]);
 
   const { loginRequest, loginFailed, loginResponse } = useSelector(
     (store) => store.auth,
   );
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (loginResponse["success"] == true) {
       navigate("/");
     }
-  }, [loginResponse]);
+  }, [loginResponse]);*/
 
   return (
     <div className={styles.login}>
       <p className="text text_type_main-medium mb-6">Вход</p>
-      <form>
+      <form onSubmit={handleLogin}>
         <EmailInput
           onChange={handleChangeEmail}
           value={email}
@@ -63,10 +74,9 @@ export function Login() {
         />
 
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
-          onClick={handleLogin}
         >
           {loginRequest ? "Загрузка..." : "Войти"}
         </Button>
